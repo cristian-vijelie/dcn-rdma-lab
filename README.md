@@ -101,7 +101,7 @@ We don't talk about it today.
 
 The best analogy for a RDMA Send is a normal packet from TCP or UDP:
 someone must send it, someone must receive it and intrerpret it.
-Nothing else, no writing someone's memory without it knowing it.
+Nothing else, no writing someone's memory without it knowing.
 
 ### Read
 
@@ -120,7 +120,7 @@ If the data fits in only one packet, we will have a `Read Response Only`.
 #### RDMA MTU
 
 There is a difference between the Ethernet MTU and the RDMA MTU.
-If the Ethernet MTU specifies the maxcimum length of a packet that includes headers, the RDMA MTU specifies the maximum length of the payload. 
+If the Ethernet MTU specifies the maximum length of a packet that includes headers, the RDMA MTU specifies the maximum length of the payload. 
 
 ### Write
 
@@ -187,20 +187,20 @@ Unless it is is notified another way, the receiver won't be notified if a `Read`
 ### 1: Lab Setup
 
 In this lab you will use 2 virtual machines, that will communicate with eachother.
-A virtual mahine with all the needed packages is provided [here](https://drive.google.com/file/d/1eT5yU0NGJ8sP47VY_HkwW-JRu3LFbB3Z/view?usp=sharing).
+A virtual machine with all the needed packages is provided [here](https://drive.google.com/file/d/1eT5yU0NGJ8sP47VY_HkwW-JRu3LFbB3Z/view?usp=sharing).
 Make sure that the virtual machines can ping eachother.
 
 For the lab to work, the virtual machines must be on a Bridged Network.
 If it doesn't work for you (looking at you, VMWare), try another hypervisor.
 
 You can also do the lab on your native Linux, but you must find another person that wants to do the same thing, so you can speak RDMA to eachother.
-Or, if you are a networking god, you can use only one VM an pair with another fellow divine.
+Or, if you are a networking god, you can use only one VM and pair with another fellow divine.
 
 ### 2: Create a RXE Interface
 
 Use the following command to create a SoftRoCE (RXE) interface, replacing <netdev> with your network device name.
 ```bash
-sudo rdma link add <netdev>rxe type rxe netdev <netdev>
+sudo rdma link add <rxe_intf_name> type rxe netdev <netdev>
 ```
 
 ### 3: Inspect The Interface
@@ -274,7 +274,7 @@ Use `Wireshark` to inspect the capture.
 Sometimes stuff doesn't work, and no one knows why.
 That's why there are hardware counters available, to shed some light.
 Usually, you can find them in `/sys/class/infiniband/<rdma_dev>/ports/1/hw_counters/`.
-Some drivers also provide additional drivers in `/sys/class/infiniband<rdma_dev>/ports/1/counters/`, but that's not our case.
+Some drivers also provide additional drivers in `/sys/class/infiniband/<rdma_dev>/ports/1/counters/`, but that's not our case.
 List those counters and try to find what they mean.
 
 ### 7: Write A RDMA Application
