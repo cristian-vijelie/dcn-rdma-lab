@@ -219,6 +219,7 @@ Some things are important here: `state`, `active_mtu`, and the GID table.
 In the image you have an interface that uses only RoCEv2, so it will have GID entries only for RoCEv2 - one for the IPv4 address, one for the IPv6 address.
 Generally, a RoCEv2 entry will corespond to an IP address assigned to the network interface to which the RDMA device is linked.
 The GID entry with the index 0 is a placeholder and should never be used.
+In our case, it is the link-local IPv6 address.
 
 Use `ip a s` to display details about the network interfaces that your system uses.
 Observe the connection between GID entries and IP addresses.
