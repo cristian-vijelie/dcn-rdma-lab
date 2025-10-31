@@ -23,13 +23,13 @@ The OG, **the** RDMA implementation.
 Usable only on Infiniband networks, provided by Mellanox, now Nvidia.
 It looks something like this:
 
-![](/images/ib.avif)
+![](/images/ib.png)
 
 People nowadays use `RoCE`, which is, essentially, `GHR`, `BTH`, and `ETH` slapped onto an Ethernet header.
 
 This is the `GRH`:
 
-![](/images/grh.avif)
+![](/images/grh.png)
 
 This is the `BTH:`
 
