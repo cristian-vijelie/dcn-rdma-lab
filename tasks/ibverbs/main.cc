@@ -302,11 +302,13 @@ int main(int argc, char *argv[])
 	memset(data_send, 0, sizeof(data_send));
 	memset(data_write, 0, sizeof(data_write));
 
+	// if you are the server, first do a write to the client, then receive a send from it
 	if (server)
 	{
 		memcpy(data_write, "Hello, but with write", 21);
 
 		// TODO 7.2: initialise sg_write with the write mr address, size and lkey
+		memset(&sg_write, 0, sizeof(sg_write));
 		
 		// create a work request, with the Write With Immediate operation
 		memset(&wr_write, 0, sizeof(wr_write));
@@ -323,7 +325,8 @@ int main(int argc, char *argv[])
 
 		// TODO 7.2: post the work request, using ibv_post_send
 
-		// TODO 7.3: initialise sg_send with the send mr address, size and lkey
+		// TODO 7.3: initialise sg_recv with the send mr address, size and lkey
+		memset(&sg_recv, 0, sizeof(sg_recv));
 
 		// create a receive work request
 		memset(&wr_recv, 0, sizeof(wr_recv));
@@ -344,7 +347,9 @@ int main(int argc, char *argv[])
 	{
 		memcpy(data_send, "Hello", 5);
 
-		// TODO 7.2: initialise sg_write with the write mr address, size and lkey
+		// TODO 7.2: initialise sg_recv with the write mr address, size and lkey
+		memset(&sg_recv, 0, sizeof(sg_recv));
+		
 		memset(&wr_recv, 0, sizeof(wr_recv));
 		wr_recv.wr_id      = 0;
 		wr_recv.sg_list    = &sg_recv;
@@ -360,6 +365,7 @@ int main(int argc, char *argv[])
 		cout << data_write << endl;
 
 		// TODO 7.3: initialise sg_send with the send mr address, size and lkey
+		memset(&sg_send, 0, sizeof(sg_send));
 
 		// create a work request, with the RDMA Send operation
 		memset(&wr_send, 0, sizeof(wr_send));
